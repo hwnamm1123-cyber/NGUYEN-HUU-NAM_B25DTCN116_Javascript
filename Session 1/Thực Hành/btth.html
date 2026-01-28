@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Tổng Hợp</title>
+</head>
+<body>
+    
+
+    <script>
+        let rawBookName = prompt("Nhập tên sách:");
+        let rawAuthor = prompt("Nhập tên tác giả:");
+        let rawPublishYear = prompt("Nhập năm xuất bản:");
+        let rawPrice = prompt("Nhập giá tiền một cuốn:");
+        let rawQuantity = prompt("Nhập số lượng nhập kho:");
+
+        let bookName = rawBookName.trim().toUpperCase();
+        let author = rawAuthor.toUpperCase();
+
+        let randomId = Math.floor(Math.random() * 1000) + 1; 
+        let randomShelf = Math.floor(Math.random() * 10) + 1;
+
+        let bookId = `${author.substring(0, 3)}${rawPublishYear}-${randomId}`;ư
+
+        let currentYear = 2026;
+        let bookAge = currentYear - parseInt(rawPublishYear);
+        let totalValue = parseFloat(rawPrice) * parseInt(rawQuantity);
+
+        console.log(`
+        --- PHIẾU NHẬP KHO ---
+        Mã sách: ${bookId}
+        Tên sách: ${bookName}
+        Tác giả: ${author}
+        Năm xuất bản: ${rawPublishYear}
+        Tuổi sách: ${bookAge} năm
+        Tổng giá trị: ${totalValue.toLocaleString()} VNĐ
+        Ngăn kệ gợi ý: Kệ số ${randomShelf}
+        `);
+    </script>
+</body>
+</html>
