@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Hệ Thống Thư Viện</title>
+</head>
+<body>
+    <h1>Quản Lý Kho Sách</h1>
+    <script>
+        // Danh sách sách ban đầu
+        let books = ["Nhà Giả Kim", "Đắc Nhân Tâm", "Tuần Làm Việc 4 Giờ"];
+
+        while (true) {
+            let menu = "--- MENU THƯ VIỆN ---\n" +
+                       "1. Xem danh sách sách\n" +
+                       "2. Nhập sách mới\n" +
+                       "3. Mượn sách (Xóa)\n" +
+                       "4. Sửa tên sách\n" +
+                       "5. Sắp xếp kệ sách\n" +
+                       "0. Thoát\n" +
+                       "Lựa chọn của bạn:";
+
+            let choice = prompt(menu);
+
+            // Thoát chương trình
+            if (choice === "0" || choice === null) {
+                console.log("Đã đóng hệ thống quản lý!");
+                break;
+            }
+
+            switch (choice) {
+                case "1":
+                    // Chức năng 1: Xem danh sách 
+                    console.log("Danh sách hiện có (" + books.length + " cuốn):");
+                    if (books.length === 0) {
+                        console.log("(Kho đang trống)");
+                    } else {
+                        let text = "";
+                        for (let i = 0; i < books.length; i++) {
+                            text = text + (i + 1) + ". " + books[i];
+                            if (i < books.length - 1) {
+                                text = text + " - ";
+                            }
+                        }
+                        console.log(text);
+                    }
+                    break;
+
+                case "2":
+                    // Chức năng 2: Thêm sách
+                    let newBook = prompt("Nhập tên sách mới:");
+                    if (newBook !== "") {
+                        books.push(newBook);
+                        console.log("Đã thêm thành công!");
+                    }
+                    break;
+
+                case "3":
+                    // Chức năng 3: Mượn sách 
+                    let bookToBorrow = prompt("Nhập tên sách muốn mượn:");
+                    let borrowIndex = -1;
+                    
+                    for (let i = 0; i < books.length; i++) {
+                        if (books[i] === bookToBorrow) {
+                            borrowIndex = i;
+                            break;
+                        }
+                    }
+
+                    if (borrowIndex !== -1) {
+                        books.splice(borrowIndex, 1);
+                        console.log("Đã cho mượn cuốn: " + bookToBorrow);
+                    } else {
+                        console.log("Lỗi: Không tìm thấy sách này trong kho!");
+                    }
+                    break;
+
+                case "4":
+                    // Chức năng 4: Sửa tên 
+                    let oldName = prompt("Nhập tên sách cũ cần sửa:");
+                    let updateIndex = -1;
+
+                    for (let i = 0; i < books.length; i++) {
+                        if (books[i] === oldName) {
+                            updateIndex = i;
+                            break;
+                        }
+                    }
+
+                    if (updateIndex !== -1) {
+                        let newName = prompt("Nhập tên mới:");
+                        books[updateIndex] = newName;
+                        console.log("Đã cập nhật tên sách thành công!");
+                    } else {
+                        console.log("Lỗi: Không tìm thấy tên sách cũ!");
+                    }
+                    break;
+
+                case "5":
+                    // Chức năng 5: Sắp xếp
+                    books.sort();
+                    console.log("Đã sắp xếp lại kệ sách theo bảng chữ cái.");
+                    break;
+
+                default:
+                    alert("Bạn chọn sai rồi, hãy nhập từ 0 đến 5!");
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai 5</title>
+</head>
+<body>
+    <script>
+        let ids = [];
+        let names = [];
+        let cats = [];
+        let qtys = [];
+
+        let n = parseInt(prompt("Có bao nhiêu loại sách cần nhập thông tin hôm nay?"));
+
+        for (let i = 0; i < n; i++) {
+            let id;
+            while (true) {
+                id = prompt("Nhập mã sách thứ " + (i + 1) + ":");
+                let daTonTai = false;
+                for (let j = 0; j < ids.length; j++) {
+                    if (ids[j] === id) {
+                        daTonTai = true;
+                        break;
+                    }
+                }
+                if (id !== "" && daTonTai === false) {
+                    break;
+                } else {
+                    alert("Mã không hợp lệ hoặc đã trùng!");
+                }
+            }
+
+            let name = prompt("Nhập tên sách thứ " + (i + 1) + ":");
+            let cat = prompt("Nhập thể loại thứ " + (i + 1) + ":");
+            let qty = parseInt(prompt("Nhập số lượng thứ " + (i + 1) + ":"));
+
+            ids.push(id);
+            names.push(name);
+            cats.push(cat);
+            qtys.push(qty);
+        }
+
+        console.log("KẾT QUẢ");
+
+        let demLapTrinh = 0;
+        for (let i = 0; i < cats.length; i++) {
+            if (cats[i].toLowerCase().includes("lập trình")) {
+                demLapTrinh++;
+            }
+        }
+        console.log("Tổng số sách Lập trình: " + demLapTrinh);
+
+        let ketQuaJSWeb = "";
+        for (let i = 0; i < cats.length; i++) {
+            let chuoiTim = cats[i].toLowerCase();
+            if (chuoiTim.includes("javascript") && chuoiTim.includes("web")) {
+                ketQuaJSWeb += ids[i] + " ";
+            }
+        }
+        console.log("Sách có cả JS và Web: " + ketQuaJSWeb);
+
+        let min = qtys[0];
+        let viTriMin = 0;
+        for (let i = 1; i < qtys.length; i++) {
+            if (qtys[i] < min) {
+                min = qtys[i];
+                viTriMin = i;
+            }
+        }
+        console.log("Sách ít nhất là: " + names[viTriMin] + " với " + min + " cuốn");
+    </script>
+</body>
+</html>
