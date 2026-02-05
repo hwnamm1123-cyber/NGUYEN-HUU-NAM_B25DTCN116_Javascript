@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let numbers = [1, 22, 12, 8, 7, 9, 15, 3, 11, 5]; 
+        let ketQua = ""; 
+        let count = 0;
+
+        for (let num of numbers) {
+            if (num >= 10) {
+                ketQua = ketQua + num + " "; 
+                count++; 
+            }
+        }
+
+        console.log("Mảng đầu vào: [" + numbers + "]");
+
+        if (count > 0) {
+            console.log("Các số lớn hơn hoặc bằng 10 là: " + ketQua);
+            console.log("Tổng cộng có: " + count + " số.");
+        } else {
+            console.log("Không có số nào lớn hơn hoặc bằng 10");
+        }
+    </script>
+</body>
+</html>

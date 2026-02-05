@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let n = parseInt(prompt("Nhập số lượng phần tử của mảng:"));
+
+        if (isNaN(n) || n <= 0) {
+            console.log("Không có ký tự số");
+        } else {
+            let charArray = [];
+            let digitChars = [];
+
+            for (let i = 0; i < n; i++) {
+                let input = prompt("Nhập ký tự thứ " + (i + 1) + ":");
+                charArray.push(input);
+            }
+
+            for (let char of charArray) {
+                if (char >= '0' && char <= '9' && char.trim() !== "") {
+                    digitChars.push(char);
+                }
+            }
+
+            if (digitChars.length > 0) {
+                console.log("Mảng đã nhập:", charArray);
+                console.log("Các ký tự số tìm thấy:", digitChars.join(" "));
+            } else {
+                console.log("Không có ký tự số");
+            }
+        }
+    </script>
+</body>
+</html>

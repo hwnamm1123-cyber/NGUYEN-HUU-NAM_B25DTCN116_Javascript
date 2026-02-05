@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let n = parseInt(prompt("Nhập số lượng phần tử n:"));
+
+        if (isNaN(n) || n < 0) {
+            if (n < 0) {
+                console.log("Số lượng phần tử không được âm");
+            } else {
+                console.log("Dữ liệu nhập vào không hợp lệ");
+            }
+        } else if (n === 0) {
+            console.log("Mảng không có phần tử");
+        } else {
+            let arr = [];
+            let sum = 0;
+            let hasNumber = false;
+
+            for (let i = 0; i < n; i++) {
+                let char = prompt("Nhập ký tự thứ " + (i + 1) + ":");
+                arr.push(char);
+            }
+
+            for (let item of arr) {
+                let num = parseFloat(item);
+
+                if (!isNaN(num)) {
+                    sum += num;
+                    hasNumber = true;
+                }
+            }
+
+            if (hasNumber) {
+                console.log("Mảng đã nhập:", arr);
+                console.log("Tổng các ký tự là số:", sum);
+            } else {
+                console.log("Không có phần tử nào là số");
+            }
+        }
+    </script>
+</body>
+</html>

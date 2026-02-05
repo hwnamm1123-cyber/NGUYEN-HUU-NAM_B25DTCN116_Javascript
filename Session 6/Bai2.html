@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let numbers = [15, 2, 8, 22, 5, 90, 11, 45, 30, 7];
+
+        if (numbers.length === 0) {
+            console.log("Không có số lớn nhất");
+        } else {
+            let max = numbers[0];
+            let index = 0;
+
+            for (let i = 1; i < numbers.length; i++) {
+                if (numbers[i] > max) {
+                    max = numbers[i]; 
+                    index = i;        
+                }
+            }
+
+            console.log("Mảng: [" + numbers.join(", ") + "]");
+            console.log("Số lớn nhất: " + max);
+            console.log("Vị trí: " + index);
+        }
+    </script>
+</body>
+</html>

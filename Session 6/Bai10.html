@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [];
+        let isRunning = true;
+
+        while (isRunning) {
+            let menu = `
+            MENU 
+            1. Nhập số phần tử và giá trị các phần tử
+            2. In ra giá trị các phần tử đang quản lý
+            3. In ra số chẵn, tính tổng và sắp xếp giảm dần
+            4. In ra Max, Min và vị trí của chúng
+            5. In ra số nguyên tố và tính tổng
+            6. Đếm số lần xuất hiện của một số
+            7. Thêm một phần tử vào vị trí chỉ định
+            8. Xóa một phần tử theo giá trị
+            9. Sắp xếp mảng (Tăng/Giảm)
+            0. Thoát
+            Lựa chọn của bạn:`;
+
+            let choice = prompt(menu);
+
+            switch (choice) {
+                case "1":
+                    let n = parseInt(prompt("Nhập số lượng phần tử:"));
+                    if (n > 0) {
+                        arr = [];
+                        for (let i = 0; i < n; i++) {
+                            arr.push(Number(prompt("Nhập phần tử thứ " + (i + 1) + ":")));
+                        }
+                    } else {
+                        alert("Số lượng không hợp lệ!");
+                    }
+                    break;
+
+                case "2":
+                    console.log("Mảng hiện tại:", arr.length > 0 ? arr.join(", ") : "Mảng rỗng");
+                    break;
+
+                case "3":
+                    let evens = arr.filter(num => num % 2 === 0).sort((a, b) => b - a);
+                    let sumEven = evens.reduce((sum, num) => sum + num, 0);
+                    console.log("Các số chẵn (giảm dần):", evens.join(", "));
+                    console.log("Tổng các số chẵn:", sumEven);
+                    break;
+
+                case "4":
+                    if (arr.length > 0) {
+                        let max = arr[0], min = arr[0];
+                        let maxIndices = [], minIndices = [];
+
+                        for (let num of arr) {
+                            if (num > max) max = num;
+                            if (num < min) min = num;
+                        }
+                        arr.forEach((num, idx) => {
+                            if (num === max) maxIndices.push(idx);
+                            if (num === min) minIndices.push(idx);
+                        });
+
+                        console.log(`Giá trị lớn nhất: ${max} (Vị trí: ${maxIndices.join(", ")})`);
+                        console.log(`Giá trị nhỏ nhất: ${min} (Vị trí: ${minIndices.join(", ")})`);
+                    } else {
+                        console.log("Mảng rỗng!");
+                    }
+                    break;
+
+                case "5":
+                    let primes = arr.filter(num => {
+                        if (num < 2) return false;
+                        for (let i = 2; i <= Math.sqrt(num); i++) {
+                            if (num % i === 0) 
+                            return false;
+                        }
+                        return true;
+                    });
+                    let sumPrime = primes.reduce((sum, num) => sum + num, 0);
+                    console.log("Các số nguyên tố:", primes.join(", "));
+                    console.log("Tổng số nguyên tố:", sumPrime);
+                    break;
+
+                case "6":
+                    let target = Number(prompt("Nhập số cần đếm:"));
+                    let count = arr.filter(num => num === target).length;
+                    console.log(`Số ${target} xuất hiện ${count} lần.`);
+                    break;
+
+                case "7":
+                    let valToAdd = Number(prompt("Nhập giá trị cần thêm:"));
+                    let pos = parseInt(prompt(`Nhập vị trí (0 - ${arr.length}):`));
+                    if (pos >= 0 && pos <= arr.length) {
+                        arr.splice(pos, 0, valToAdd);
+                        console.log("Đã thêm thành công.");
+                    } else {
+                        alert("Vị trí không hợp lệ!");
+                    }
+                    break;
+
+                case "8":
+                    let valToRemove = Number(prompt("Nhập giá trị cần xóa:"));
+                    let initialLength = arr.length;
+                    arr = arr.filter(num => num !== valToRemove);
+                    
+                    if (arr.length < initialLength) {
+                        console.log(`Đã xóa tất cả phần tử có giá trị ${valToRemove}`);
+                    } else {
+                        console.log("Không tìm thấy giá trị để xóa.");
+                    }
+                    break;
+
+                case "9":
+                    let type = prompt("Nhập 'T' để sắp xếp Tăng dần, 'G' để Giảm dần:").toUpperCase();
+                    
+                    if (type === 'T') {
+                        arr.sort((a, b) => a - b);
+                        console.log("Đã sắp xếp tăng dần.");
+                    } else if (type === 'G') {
+                        arr.sort((a, b) => b - a);
+                        console.log("Đã sắp xếp giảm dần.");
+                    } else {
+                        alert("Lựa chọn không hợp lệ!");
+                    }
+                    break;
+
+                case "0":
+                    console.log("Thoát chương trình");
+                    isRunning = false;
+                    break;
+
+                default:
+                    alert("Lựa chọn từ 0-9!");
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
