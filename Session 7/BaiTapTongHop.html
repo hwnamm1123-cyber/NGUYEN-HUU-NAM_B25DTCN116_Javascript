@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const players = [];
+        const goals = [];
+
+        function addPlayer(name, goal) {
+            players.push(name);
+            goals.push(parseInt(goal) || 0);
+            console.log(`Đã thêm ${name} thành công.`);
+        }
+
+
+        function showSquad() {
+            if (players.length === 0) {
+                console.log("Danh sách đội hình hiện đang trống.");
+                return;
+            }
+            console.log("DANH SÁCH ĐỘI HÌNH");
+            players.forEach((name, index) => {
+                console.log(`${index + 1}. ${name} - ${goals[index]} bàn`);
+            });
+        }
+
+        const getTotalGoals = function() {
+            return goals.reduce((total, current) => total + current, 0);
+        };
+
+
+        function findMostGoals(goalsArray) {
+            if (goalsArray.length === 0) return 0;
+            return Math.max(...goalsArray);
+        }
+
+
+        let isRunning = true;
+
+        while (isRunning) {
+            const menu = `
+        QUẢN LÝ ĐỘI BÓNG
+        1. Nhập cầu thủ mới
+        2. Xem danh sách đội hình
+        3. Xem thành tích toàn đội
+        4. Tìm Vua phá lưới
+        0. Thoát
+        Lựa chọn:`;
+
+            let choice = prompt(menu);
+
+            switch (choice) {
+                case "1":
+                    let name = prompt("Nhập tên cầu thủ:");
+                    let goal = prompt("Nhập số bàn thắng:");
+                    if (name) {
+                        addPlayer(name, goal);
+                    } else {
+                        alert("Tên cầu thủ không được để trống!");
+                    }
+                    break;
+
+                case "2":
+                    showSquad();
+                    break;
+
+                case "3":
+                    const total = getTotalGoals();
+                    console.log(`Tổng số bàn thắng của cả đội là: ${total} bàn.`);
+                    break;
+
+                case "4":
+                    const maxGoal = findMostGoals(goals);
+                    if (maxGoal === 0 && players.length === 0) {
+                        console.log("Chưa có dữ liệu cầu thủ.");
+                    } else {
+                        const topIndex = goals.indexOf(maxGoal);
+                        const topPlayer = players[topIndex];
+                        
+                        console.log(`Vua phá lưới hiện tại là ${topPlayer} với: ${maxGoal} bàn.`);
+                    }
+                    break;
+
+                case "0":
+                    console.log("Đã thoát chương trình quản lý.");
+                    isRunning = false;
+                    break;
+
+                default:
+                    alert("Lựa chọn không hợp lệ, vui lòng nhập lại (0-4).");
+            }
+        }
+    </script>
+</body>
+</html>

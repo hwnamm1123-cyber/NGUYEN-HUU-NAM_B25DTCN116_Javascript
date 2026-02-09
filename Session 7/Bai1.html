@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let playerIds = [];
+        let playerPosstisions = [];
+
+        const POSITION_NAMES = {
+            "1": "Thủ môn",
+            "2": "Hậu Vệ",
+            "3": "Tiền Vệ",
+            "4": "Tiền Đạo"
+         };
+
+        let n = parseInt(prompt("Có bao nhiêu cầu thủ cần nhập vào đội bóng?"));
+
+        if (isNaN(n) || n <= 0){
+            console.log("Số lượng cầu thủ không hợp lệ!");
+        } else {
+            for (let i = 0; i < n; i++){
+                let id;
+                do {
+                    id = prompt(`Nhập mã cầu thủ ${i + 1}:`).trim();
+                    if (playerIds.includes(id)) alert("Mã đã tồn tại!");
+                } while (playerIds.includes(id) || !id);
+
+                let posKey;
+                do {
+                    posKey = prompt(`Nhập vị trí của ${id} (1:TM, 2:HV, 3:TV, 4:TĐ):`);
+                } while (!POSITION_NAMES[posKey]);
+
+                playerIds.push(id);
+                playerPosstisions.push(POSITION_NAMES[posKey]);
+            }
+
+            const printTeam = () => {
+                console.log(`Đội bóng hiện tại (${playerIds.length} cầu thủ):`);
+                playerIds.forEach((id, i) => console.log(`${i + 1}. ${id} - ${playerPosstisions[i]}`));
+            };
+
+            const playerByPosition = (posName) =>
+                playerPosstisions.map((p, i) => p === posName ? i : -1).filter(i => i !== -1);
+
+            let searchKey = prompt("Vị trí muốn đếm: ");
+            let searchName = POSITION_NAMES[searchKey];
+
+            printTeam();
+
+            if (searchName){
+                let indices = playerByPosition(searchName);
+                console.log(`\nSố cầu thủ vị trí ${searchName}: ${indices.length}`);
+                console.log(`Các chỉ số (index): ${indices.join(", ")}`);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const players = [
+            "P001-Quang Hải-Tiền vệ",
+            "P002-Công Phượng-Tiền đạo",
+            "P003-Văn Hậu-Hậu vệ",
+            "P004-Đặng Văn Lâm-Thủ môn",
+            "P005-Phan Văn Đức-Tiền vệ",
+            "P006-Quế Ngọc Hải-Hậu vệ"
+        ];
+
+        const getPossition = () => {
+            const position = players.map(player => player.split("-")[2]);
+            return[...new Set(position)]; //Set dùng để loại bỏ trùng lăopj
+        };
+
+        const findPlayerLongName = () => {
+            return players.reduce((longest, current) => {
+                const currenName = current.split("-")[1]; 
+                //so sáh tên hiện tại với tên dài nhất tìm thấy
+                return currenName.length > longest.length ? currentName : longest;
+            });
+        };
+
+        const countPlayersStartingWithLetter = (letter) => {
+            const searchLetter = letter.toLowerCase();
+            
+            return players.filter(player => {
+                const name = player.split("-")[1];
+                return name.toLowerCase().startsWith(searchLetter);
+            }).length;
+        };
+
+        console.log("Danh sách vị trí duy nhất trong đội:");
+        console.log(getPossition());
+
+        console.log("\nCầu thủ có tên dài nhất:");
+        console.log(findPlayerLongName());
+
+        const char = "Q";
+        console.log(`\nSố lượng cầu thủ có tên bắt đầu bằng chữ '${char}':`);
+        console.log(countPlayersStartingWithLetter(char));
+    </script>
+</body>
+</html>

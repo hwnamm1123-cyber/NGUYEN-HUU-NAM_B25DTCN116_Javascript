@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const players = [
+            "P001-Quang Hải-Tiền vệ",
+            "P002-Công Phượng-Tiền đạo",
+            "P003-Văn Hậu-Hậu vệ",
+            "P004-Đặng Văn Lâm-Thủ môn",
+            "P005-Bùi Tiến Dũng-Thủ môn"
+        ];
+
+        const printTeam = () => {
+            console.log("DANH SÁCH ĐỘI BÓNG");
+            players.forEach((player, index) => {
+                const [id, name, position] = player.split("-");
+                console.log(`${index + 1}. ${id} | ${name} | ${position}`);
+            });
+        };
+
+        const countPlayerByPostion = (playerLisst) => {
+            const counts = {};
+            playerList.forEach(item => {
+                counts[position] = (coints[position] || 0 ) + 1;
+            });
+            return counts;
+        };
+
+        const ThuMon = () => {
+            return players.some(player => player.split("-")[2] === "Thủ môn");
+        };
+
+        prỉntTeam();
+
+        console.log("Thống kê số lượng theo vị trí: ");
+        console.log(countPlayerByPostion(player));
+
+        console.log("Kiểm tra thủ môn: ");
+        console.log(ThuMon() ? "Có thủ môn trong đội" : "Không có thủ môn nào!");
+    </script>
+</body>
+</html>

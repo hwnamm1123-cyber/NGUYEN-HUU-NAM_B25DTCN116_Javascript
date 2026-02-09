@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const players = [
+            "P001-Nguyễn Văn A-Thủ môn",
+            "P002-Trần Thị B-Hậu vệ",
+            "P003-Lê Văn C-Hậu vệ",
+            "P004-Phạm Văn D-Tiền vệ",
+            "P005-Hoàng Thị E-Tiền đạo",
+            "P006-Vũ Minh F-Tiền đạo",
+            "P007-Đặng Văn G-Thủ môn"
+        ];
+
+        const getShortestPlayerName = () => {
+            return players.reduce((shortest, current) => {
+                const currentName = current.split("-")[1]; //phần Tên
+
+                if (shortest === "" || currentName.length < shortest.length) {
+                    return currentName;
+                }
+                return shortest;
+            }, "");
+        };
+
+
+
+        const countPlayersLength = (length) => {
+            return players.filter(player => {
+                const position = player.split("-")[2]; // Lấy phần Vị trí
+                return position.length > length;
+            }).length;
+        };
+
+
+
+        console.log("Dữ liệu đội bóng:", players);
+
+        console.log("Cầu thủ có tên ngắn nhất:");
+        console.log(getShortestPlayerName()); 
+
+        const threshold = 7;
+        console.log(`Số lượng cầu thủ có tên vị trí dài hơn ${threshold} ký tự:`);
+        console.log(countPlayersLength(threshold)); 
+    </script>
+</body>
+</html>

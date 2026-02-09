@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const players = [
+            "P001-Quang Hải-Tiền vệ",
+            "P002-Công Phượng-Tiền đạo",
+            "P003-Văn Hậu-Hậu vệ",
+            "P004-Đặng Văn Lâm-Thủ môn",
+            "P005-Bùi Tiến Dũng-Thủ môn"
+        ];
+
+        const printTeam = () => {
+            console.log("DANH SÁCH ĐỘI BÓNG");
+            players.forEach((player, index) => {
+                const [id, name, position] = player.split("-");
+                console.log(`${index + 1}. ${id} | ${name} | ${position}`);
+            });
+        };
+
+        const countPlayerByPosition = (playerList) => {
+            const counts = {};
+
+            playerList.forEach(player => {
+                const position = player.split("-")[2];
+                counts[position] = (counts[position] || 0) + 1;
+            });
+            return counts;
+        };
+
+        const ThuMon = () => {
+            return players.some(player => player.split("-"[2]) === "Thủ môn"); 
+        };
+
+        printTeamRoster();
+
+        console.log("\nThống kê vị trí:", countPlayerByPosition(players));
+
+        if (hasGoalkeeper()) {
+            console.log("Đội đã có ít nhất 1 thủ môn.");
+        } else {
+            console.log("Cảnh báo: Đội chưa có thủ môn!");
+        }
+    </script>
+</body>
+</html>

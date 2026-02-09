@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let playerIds = ["P001", "P002", "P003"];
+        let playerNames = ["Quang Hải", "Công Phượng", "Văn Hậu"];
+        let playerJerseyNumbers = [19, 10, 5];
+
+        const printTeam = () => {
+            console.log("ĐỘI BÓNG HIỆN TẠI");
+            playerIds.forEach((id, i) => {
+                console.log(`${i + 1}. ${id} - ${playerNames[i]} - Số áo: ${playerJerseyNumbers[i]}`);
+            });
+        };
+
+        const updatePlayerNameAndJersey = (playerId, newName, newJerseyNumber) => {
+            const idx = playerIds.indexOf(playerId);
+            if (idx === -1) return false;
+
+
+            playerNames[idx] = newName || playerNames[idx];
+            playerJerseyNumbers[idx] = parseInt(newJerseyNumber);
+            return true;
+        };
+
+        printTeam();
+
+        const targetID = prompt("Nhập mã cầu thủ muốn cập nhật: ").trim().toUpperCase();
+
+        if (playerIds.includes(targetID)){
+            const newName = prompt("Nhập têm mới cho cầu thủ: ");
+            let newJersey;
+
+            do {
+                newJersey = parseInt(prompt("Nhập số áo mới (1-99): "))
+            } while (isNaN(newJersey) || newJersey < 1 || newJersey > 99);
+
+            if (updatePlayerNameAndJersey(targetID, newName, newJersey)){
+                console.log ("Cập nhật thành công!");
+                printTeam();
+            }
+        } else {
+            console.log("Không tìm thấy cầu thủ với mã này!");
+        }
+    </script>
+</body>
+</html>
