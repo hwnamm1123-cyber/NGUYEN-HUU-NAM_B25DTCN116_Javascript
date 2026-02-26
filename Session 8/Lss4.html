@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 4</title>
+</head>
+<body>
+    <script>
+        const players = [
+        "Messi - Forward - 25",
+        "Ronaldo - Forward - 30",
+        "Neymar - Forward - 18",
+        "De Bruyne - Midfielder - 8",
+        "Kante - Midfielder - 2",
+        "Van Dijk - Defender - 5",
+        "Alisson - Goalkeeper - 0",
+        ];
+
+        function getReversedNames(playersArray){
+            let names = playersArray.map((player) => {
+                return player.split(" - ")[0];
+            });
+            return names.reverse();
+        }
+
+        const result = getReversedNames(players);
+        console.log(result);
+    </script>
+</body>
+</html>

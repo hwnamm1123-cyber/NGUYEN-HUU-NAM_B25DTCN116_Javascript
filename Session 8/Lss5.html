@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 5</title>
+</head>
+<body>
+    <script>
+        const players = [
+            "Messi - Forward - 25 - 15",
+            "Ronaldo - Forward - 30 - 10",
+            "Neymar - Forward - 18 - 20",
+            "De Bruyne - Midfielder - 8 - 25",
+            "Kante - Midfielder - 2 - 5",
+            "Van Dijk - Defender - 5 - 3",
+            "Alisson - Goalkeeper - 0 - 1",
+        ];
+
+        let top = (min, players) => {
+            let total = players.map(item => {
+                const [name, pos, goals, assists] = item.split(" - ");
+                return { 
+                    name, performance: Number(goals) + Number(assists)
+                };
+            })
+            .filter(player => player.performance >= minPerformance)
+            .map(player => {
+                console.log(`${player.name}: ${player.performance}`);
+                return player; 
+            })
+
+            console.log(`Tổng hiệu suất: ${total}`);
+            
+            return total;
+        };
+        
+        reportTopPerformers(30, players);
+    </script>
+</body>
+</html>

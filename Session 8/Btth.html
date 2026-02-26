@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài tập tổng hợp</title>
+</head>
+<body>
+    <script>
+        const squad = [
+            ["Nguyen Van A", 10, "FW"],
+            ["Tran Van B", 5, "MF"],
+            ["Le Van C", 2, "DF"],
+            ["Pham Van D", 12, "FW"],
+            ["Hoang Van E", 0, "GK"],
+            ["Dang Van F", 7, "MF"]
+        ];
+
+        let choice;
+        do{
+            choice = prompt(
+                    `--- QUẢN LÝ ĐỘI BÓNG ---
+                    1. Xem danh sách cầu thủ
+                    2. Tìm kiếm cầu thủ
+                    3. Lọc cầu thủ theo vị trí
+                    4. Thống kê tổng bàn thắng
+                    5. Kiểm tra hiệu suất
+                    0. Thoát`
+                );
+                switch(choice){
+                    case 1:
+                        function displayplayers(squad){
+                            squad.forEach(element =>  {
+                            console.log(`${element[0]} (${element[2]}) ${element[1]}`) ;
+                            });
+                        }
+                        displayplayers(squad);
+                        break;
+
+                    case 2:
+                        let playername = prompt("Nhập tên cầu thủ muốn tìm kiếm");
+                            let findplayers = squad.find(function(player) {
+                            return player[0] === playername;
+                        });
+
+                        if (findplayers) {
+                                console.log( `${findplayers[0]},${findplayers[1]},${findplayers[2]} `);
+                                
+                        } else {
+                                console.log("Không tìm thấy");
+                            }
+                        break;
+
+                    case 3:
+                        let position=prompt(`Nhập vị trí muốn lọc (FW/MF/DF/GK) :`);
+                        let positionarr=squad.filter(player=> {
+                            return player[2]===position;
+
+                        }
+                        );
+                        positionarr.forEach(player => {
+                        console.log(`${player[0]} (${player[1]})`);
+                        });
+                        break;
+
+                    case 4:
+                        let goals=squad.reduce((acc,value,index)=>{
+                            acc+=value[1];
+                            return acc;
+                        },0);
+                        console.log(`Tổng số bàn thằng của đội là ${goals}`)
+                        break;
+
+                    case 5:
+                        let goal=squad.some(g=>{
+                            return g[1]===0?true:false})
+                        if(g){
+                            console.log(`Có cầu thủ chưa ghi bàn`);
+                        }
+                        let all=squad.every(all=>{
+                            return all[1]>0?true:false
+                        });
+                        if(all){
+                            console.log(`Tất cả cầu thủ đã ghi bàn`);
+                        }
+                        break;
+
+                    case 0:
+                        console.log(`Hẹn gặp lại`);
+                        break;
+                    
+                    default: 
+                    break;
+                }
+            } while(choice!==0)
+    </script>
+</body>
+</html>

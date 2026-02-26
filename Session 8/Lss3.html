@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai 3</title>
+</head>
+<body>
+    <script>
+        const players = [
+            "Messi - Forward",
+            "Ronaldo - Forward",
+            "Neymar - Forward",
+            "De Bruyne - Midfielder",
+            "Kante - Midfielder",
+            "Van Dijk - Defender",
+            "Alisson - Goalkeeper",
+        ];
+        
+        function filterPlayersByPosition(position, playersArray) {
+            return playersArray.filter((player) => {
+                return player.endsWith(position);
+            });
+        }
+
+        const midfielders = filterPlayersByPosition("Midfielder", players);
+        console.log(midfielders); 
+
+        const forwards = filterPlayersByPosition("Forward", players);
+        console.log(forwards);
+    </script>
+</body>
+</html>

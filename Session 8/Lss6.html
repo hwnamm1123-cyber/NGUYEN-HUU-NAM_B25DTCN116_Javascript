@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const players = [
+            "Messi - Forward - 30 - 10 - 34",
+            "Ronaldo - Forward - 28 - 12 - 35",
+            "Neymar - Forward - 15 - 23 - 35",
+            "De Bruyne - Midfielder - 8 - 25 - 35",
+            "Van Dijk - Defender - 5 - 3 - 33"
+        ];
+
+        const reportP = (players) => {
+        const positions = ["Forward", "Midfielder", "Defender", "Goalkeeper"];
+
+        console.log("BÁO CÁO HIỆU SUẤT THEO VỊ TRÍ\n");
+
+        positions.forEach(pos => {
+            const filtered = players.filter(p => p.includes(pos));
+
+            let count = filtered.length;
+            let totalGoals = 0;
+            let totalAssists = 0;
+            let totalMatches = 0;
+
+            filtered.forEach(p => {
+            const parts = p.split(" - ");
+            totalGoals += +parts[2];
+            totalAssists += +parts[3];
+            totalMatches += +parts[4];
+            });
+
+            if (count > 0) {
+            const avg = ((totalGoals + totalAssists) / totalMatches).toFixed(2);
+
+            console.log(`${pos}:\n`);
+            console.log(`- Số cầu thủ: ${count}`);
+            console.log(`- Tổng bàn thắng: ${totalGoals}`);
+            console.log(`- Tổng kiến tạo: ${totalAssists}`);
+            console.log(`- Tổng số trận: ${totalMatches}`);
+            console.log(`- Trung bình hiệu suất/trận: ${avg}\n`);
+            }
+        });
+
+        const totalTeamGoals = players.reduce((sum, p) => {
+            return sum + +p.split(" - ")[2];
+        }, 0);
+
+        console.log(`Tổng bàn thắng toàn đội : ${totalTeamGoals}`);
+        };
+
+        reportP(players);
+    </script>
+</body>
+</html>
