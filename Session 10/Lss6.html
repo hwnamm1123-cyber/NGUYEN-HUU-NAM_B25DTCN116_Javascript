@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let players = [
+            { name: "Ronaldo", matches: 35, goals: 30, assists: 7, yellowCards: 2 },
+            { name: "Messi", matches: 34, goals: 25, assists: 15, yellowCards: 4 },
+            { name: "Neymar", matches: 32, goals: 18, assists: 20, yellowCards: 5 },
+            { name: "Mbappe", matches: 20, goals: 10, assists: 5, yellowCards: 1 }
+        ];
+
+        function generateRankingReport(minMatches, players){
+            let filtered = players.filter(p => p.matches >= minMatches);
+
+            let enhanced = filtered.map((p, index) => {
+                let performanceScore = (p.goals + p.assists) / p.matches;
+                performanceScore = +performanceScore.toFixed(2);
+
+                let efficiencyScore = performanceScore - (p.yellowCards / p.matches) * 10;
+                efficiencyScore = +efficiencyScore.toFixed(2);
+
+                return {
+                    ...p,
+                    performanceScore,
+                    efficiencyScore,
+                    originalIndex: index
+                };
+            });
+
+            let ranked = enhanced.sort((a, b) => {
+                if(b.efficiencyScore !== a.efficiencyScore){
+                    return b.efficiencyScore - a.efficiencyScore;
+                }
+                if(b.performanceScore !== a.performanceScore){
+                    return b.performanceScore - a.performanceScore;
+                }
+                if(b.goals !== a.goals){
+                    return b.goals - a.goals;
+                }
+                return a.originalIndex - b.originalIndex;
+            });
+
+            console.log("XẾP HẠNG ĐỘI BÓNG (từ minMatches trở lên)\n");
+
+            ranked.forEach((p, i) => {
+                console.log(`${i+1}. ${p.name} - Efficiency: ${p.efficiencyScore} | Performance: ${p.performanceScore} | Goals: ${p.goals}`);
+            });
+
+            console.log(`\nTổng số cầu thủ xếp hạng: ${ranked.length}`);
+
+            if(ranked.length > 0){
+                console.log(`Cầu thủ xuất sắc nhất: ${ranked[0].name}`);
+            }
+
+            let top3 = ranked.slice(0,3);
+
+            if(top3.length > 0){
+                let avg = top3.reduce((sum, p) => sum + p.efficiencyScore, 0) / top3.length;
+                console.log(`Trung bình efficiency top 3: ${avg.toFixed(2)}`);
+            }
+        }
+
+        generateRankingReport(30, players);
+    </script>
+</body>
+</html>

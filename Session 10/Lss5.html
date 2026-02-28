@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lss5</title>
+</head>
+<body>
+    <script>
+        let teamHistory = [
+            {
+                name: "Messi",
+                position: "Forward",
+                nationality: "Argentina",
+                seasons: [
+                    { season: "2021-2022", matches: 30, goals: 20, assists: 10, yellowCards: 2 },
+                    { season: "2022-2023", matches: 32, goals: 19, assists: 16, yellowCards: 1 },
+                    { season: "2023-2024", matches: 32, goals: 25, assists: 15, yellowCards: 3 }
+                ]
+            },
+            {
+                name: "Ronaldo",
+                position: "Forward",
+                nationality: "Portugal",
+                seasons: [
+                    { season: "2021-2022", matches: 28, goals: 22, assists: 5, yellowCards: 2 },
+                    { season: "2022-2023", matches: 30, goals: 24, assists: 6, yellowCards: 3 }
+                ]
+            }
+        ];
+
+        function generatePlayerSeasonReport(playerName, teamHistory){
+            let player = teamHistory.find(p => p.name === playerName);
+
+            if(!player){
+                return `Không tìm thấy cầu thủ ${playerName}`;
+            }
+
+            let totals = player.seasons.reduce((acc, s) => {
+                acc.totalMatches += s.matches;
+                acc.totalGoals += s.goals;
+                acc.totalAssists += s.assists;
+                acc.totalYellowCards += s.yellowCards;
+                return acc;
+            }, {
+                totalMatches: 0,
+                totalGoals: 0,
+                totalAssists: 0,
+                totalYellowCards: 0
+            });
+
+            let avgGoals = +(totals.totalGoals / totals.totalMatches).toFixed(2);
+            let avgAssists = +(totals.totalAssists / totals.totalMatches).toFixed(2);
+
+            let bestSeason = player.seasons.reduce((best, s) => {
+                if(
+                    s.goals > best.goals ||
+                    (s.goals === best.goals && s.assists > best.assists)
+                ){
+                    return s;
+                }
+                return best;
+            });
+
+            return {
+                name: player.name,
+                position: player.position,
+                nationality: player.nationality,
+                careerStats: {
+                    totalMatches: totals.totalMatches,
+                    totalGoals: totals.totalGoals,
+                    totalAssists: totals.totalAssists,
+                    totalYellowCards: totals.totalYellowCards,
+                    averageGoalsPerMatch: avgGoals,
+                    averageAssistsPerMatch: avgAssists,
+                    bestSeason: {
+                        season: bestSeason.season,
+                        goals: bestSeason.goals,
+                        assists: bestSeason.assists
+                    }
+                }
+            };
+        }
+
+        console.log(generatePlayerSeasonReport("Messi", teamHistory));
+    </script>
+</body>
+</html>

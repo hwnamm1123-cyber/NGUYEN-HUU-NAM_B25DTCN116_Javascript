@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lss4</title>
+</head>
+<body>
+    <script>
+        let players = [
+            { name: "Ronaldo", years: 20, salary: 90 },
+            { name: "Messi", years: 18, salary: 100 },
+            { name: "Neymar", years: 12, salary: 85 },
+            { name: "Modric", years: 22, salary: 70 },
+            { name: "Mbappe", years: 6, salary: 95 }
+        ];
+
+        function analyzeSalary(minYears, teamPlayers){
+            let filtered = teamPlayers.filter(p => p.years >= minYears);
+
+            if(filtered.length === 0){
+                return {
+                    totalSalary: 0,
+                    highestPaid: null,
+                    lowestPaid: null
+                };
+            }
+
+            let totalSalary = filtered.reduce((sum, p) => sum + p.salary, 0);
+
+            let highestPaid = filtered.reduce((max, p) => 
+                p.salary > max.salary ? p : max
+            );
+
+            let lowestPaid = filtered.reduce((min, p) => 
+                p.salary < min.salary ? p : min
+            );
+
+            return {
+                totalSalary,
+                highestPaid,
+                lowestPaid
+            };
+        }
+
+        console.log(analyzeSalary(10, players));
+        console.log(analyzeSalary(30, players));
+    </script>
+</body>
+</html>
