@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniProject</title>
+</head>
+<body>
+    <script>
+        let students = [];
+        let isRunning = true;
+
+        const createStudent = () => {
+            const id = Number(prompt("Nhập ID sinh viên:"));
+            const name = prompt("Nhập tên sinh viên:");
+            const age = Number(prompt("Nhập tuổi:"));
+            const gpa = Number(prompt("Nhập GPA:"));
+            const status = prompt("Trạng thái (active/inactive):").toLowerCase();
+
+            students.push({ id, name, age, gpa, status });
+            alert("Thêm mới thành công!");
+        };
+
+        const displayStudents = () => {
+            if (students.length === 0) return alert("Danh sách trống!");
+            
+            let output = "DANH SÁCH SINH VIÊN \n";
+            students.forEach(s => {
+                output += `ID: ${s.id}  Tên: ${s.name}  Tuổi: ${s.age}  GPA: ${s.gpa}  Trạng thái: ${s.status}\n`;
+            });
+            console.log(output);
+            alert("Danh sách đã in ra console!");
+        };
+
+        const filterScholarship = () => {
+            const list = students.filter(s => s.gpa > 8.0);
+            console.log("Sinh viên đủ điều kiện học bổng:", list);
+            alert(`Có ${list.length} sinh viên đủ điều kiện (GPA > 8.0).`);
+        };
+
+        const updateStudent = () => {
+            const updateId = Number(prompt("Nhập ID sinh viên cần sửa:"));
+            const student = students.find(s => s.id === updateId);
+            if (student) {
+                student.name = prompt("Nhập tên mới:", student.name);
+                student.gpa = Number(prompt("Nhập GPA mới:", student.gpa));
+                alert("Cập nhật thành công!");
+            } else {
+                alert("Lỗi: Không tìm thấy ID!");
+            }
+        };
+
+        const deleteStudent = () => {
+            const deleteId = Number(prompt("Nhập ID sinh viên cần xóa:"));
+            const initialLength = students.length;
+            students = students.filter(s => s.id !== deleteId);
+            
+            students.length < initialLength ? alert("Xóa thành công!") : alert("Lỗi: Không tìm thấy ID!");
+        };
+
+        const verifyCompliance = () => {
+            const hasUnder18 = students.some(s => s.age < 18);
+            const isAllActive = students.every(s => s.status === "active");
+            alert(`Có sinh viên < 18 tuổi: ${hasUnder18}\nTất cả là Active: ${isAllActive}`);
+        };
+
+        const calculateAvgGPA = () => {
+            if (students.length === 0) return alert("Không có dữ liệu!");
+            const total = students.reduce((acc, curr) => acc + curr.gpa, 0);
+            alert(`Điểm GPA trung bình: ${(total / students.length).toFixed(2)}`);
+        };
+
+        const normalizeNames = () => {
+            const names = students.map(s => s.name.toUpperCase());
+            console.log("Danh sách tên viết hoa:", names);
+            alert("Đã chuẩn hóa tên in hoa ra console!");
+        };
+
+        while (isRunning) {
+            const menu = `
+            ---- QUẢN LÝ SINH VIÊN ----
+            1. Thêm sinh viên
+            2. Xem danh sách
+            3. Lọc học bổng
+            4. Cập nhật thông tin
+            5. Xóa sinh viên
+            6. Kiểm tra tuân thủ
+            7. Tính điểm trung bình
+            8. Chuẩn hóa tên (In hoa)
+            0. Thoát
+            ---------------------------
+            Nhập lựa chọn của bạn:`;
+
+            const choice = prompt(menu);
+
+            switch (choice) {
+                case "1": createStudent(); break;
+                case "2": displayStudents(); break;
+                case "3": filterScholarship(); break;
+                case "4": updateStudent(); break;
+                case "5": deleteStudent(); break;
+                case "6": verifyCompliance(); break;
+                case "7": calculateAvgGPA(); break;
+                case "8": normalizeNames(); break;
+                case "0":
+                    isRunning = false;
+                    alert("Tạm biệt!");
+                    break;
+                default:
+                    if (choice !== null) alert("Lựa chọn không hợp lệ!");
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
