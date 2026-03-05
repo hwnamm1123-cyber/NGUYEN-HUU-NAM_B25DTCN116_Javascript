@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Đăng ký</h2>
+    <p>Email</p>
+    <input type="email" id="email" placeholder="Nhập email">
+    <p>Mật khẩu</p>
+    <input type="password" id="password" placeholder="Nhập mật khẩu">
+    <p>Nhập lại mật khẩu</p>
+    <input type="password" id="password-again" placeholder="Nhập lại mật khẩu">
+    <button type="submit">Đăng ký</button>
+    <script>
+        let inputEmail = document.getElementById('email').value;
+        let inputPassword = document.getElementById('password').value;
+        let inputPasswordAgain = document.getElementById('password-again').value;
+        let submitButton = document.querySelector('button[type="submit"]');
+        submitButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            let email = inputEmail;
+            let password = inputPassword;
+            let passwordAgain = inputPasswordAgain;
+            console.log('email: ' + email + ', password: ' + password + ', rePassword: ' + passwordAgain);
+        });
+    </script>
+</body>
+</html>
