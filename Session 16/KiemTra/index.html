@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>📝 Todo List</h1>
+
+      <div class="input-row">
+        <input type="text" id="taskInput" placeholder="Nhập công việc..." />
+        <button>Thêm</button>
+      </div>
+
+      <ul id="taskList">
+        <li>Quét nhà</li>
+        <li>Giặt quần áo</li>
+      </ul>
+    </div>
+    <script>
+      function renderList() {
+        const taskList = document.getElementById("taskList");
+        taskList.innerHTML = "";
+        tasks.forEach((task, index) => {
+          const li = document.createElement("li");
+          li.textContent = task;
+            renderList();
+          });
+          taskList.appendChild(li);
+      }
+
+      function addTask() {
+        const taskInput = document.getElementById("taskInput");
+        const newTask = taskInput.value.trim();
+        if (newTask) {
+          tasks.push(newTask);
+          renderList();
+          taskInput.value = "";
+        }
+        const addButton = document.querySelector(".input-row button");
+        addButton.addEventListener("click", addTask);
+        taskInput.addEventListener("keypress", (e) => {
+          if (e.key === "Thêm") {
+            addTask();
+          }
+        });
+      }
+
+      function checkValidate() {
+        const taskInput = document.getElementById("taskInput");
+        const newTask = taskInput.value.trim();
+        if (!newTask) {
+          alert("Vui lòng nhập tên công việc!");
+          return false;
+        }
+        return true;
+      }
+      
+    </script>
+  </body>
+</html>
